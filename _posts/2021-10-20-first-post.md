@@ -32,8 +32,6 @@ title: Example content
 ![1](https://i.imgur.com/orBAuKy.png)
  <그림1> 
 
-
-
 이렇게 선형 축소 방법론이 유효하지 못할 경우 Nonlinear Mapping 방법론적 접근이 필요하며 대표적으로 오늘 다룰 Isomap, LLE, t-SNE 방법론이 있겠습니다.
 
 ---
@@ -105,7 +103,7 @@ MNIST 7개의 손글씨 숫자 Dataset을 Isomap에 활용하여 차원 축소
 
 1. Dijkstra 알고리즘 생성 
 
-~~~
+```
 class Graph(object):
     def __init__(self):
         self.nodes = set()
@@ -141,11 +139,11 @@ def dijkstra(graph, initial_node):
                 visited_dist[edge] = wt
     return visited_dist
     
-~~~
+```
 
 2. Isomap 함수 생성
 
-~~~
+```
 from sklearn.neighbors import NearestNeighbors, kneighbors_graph
 from sklearn.decomposition import KernelPCA
 from dijkstra import Graph, dijkstra
@@ -162,11 +160,11 @@ def isomap(input, n_neighbors, n_components, n_jobs):
     Z *= -0.5
     embedding = kernel_pca_.fit_transform(Z)
     return(embedding)
-~~~
+```
 
 3. MNIST 데이터 활용하여 모델 적용 
 
-~~~
+```
 from sklearn import (datasets,random_projection)
 from time import time
 import numpy as np
@@ -231,20 +229,17 @@ embedding_three_dim = isomap(input=X, n_neighbors=n_neighbors, n_components=3, n
 fig = plt.figure()
 ax = Axes3D(fig)
 ax.scatter(embedding_three_dim[:, 0], embedding_three_dim[:, 1], embedding_three_dim[:, 2], c=y)
-~~~
+
+```
 
 4. 최종 시각화 결과 확인
 
 총 7개의 숫자가 2차원에서도 잘 분류되었고 3차원에서도 각 색깔이 뚜렷하게 군집을 이루고 있음을 확인할 수 있다. 
 
 ![다운로드](https://i.imgur.com/lpviFTG.png)
-
 <그림5>
-
 ![다운로드 (1)](https://i.imgur.com/J9Rdi7l.png)
 <그림6>
-
-
 ---
 
 ##LLE
@@ -265,13 +260,9 @@ LLE 알고리즘은 3 단계로 구성됩니다.
 
 현재의 데이터를 나머지 k개의 데이터의 가중치의 합을 뺄 때 최소가 되는 가중치 매트릭스를 구합니다. 
 
-$$
-E(W) = \sum_i \left|x_i - \sum_j W_{ij} x_j\right|^2
-$$  
+$ E(W) = \sum_i \left|x_i - \sum_j W_{ij} x_j\right|^2$  
 
-$$ s.t. W_{ij} = 0 $$ 
- 
-if $$ x_j $$ 가 $$x_i$의 이웃에 속하지 않을때
+s.t. $ W_{ij} = 0 $ if $ x_j $ 가 $x_i$의 이웃에 속하지 않을때
 
 모든 i 에 대하여 $\sum_j W_{ij} = 1$  
 
