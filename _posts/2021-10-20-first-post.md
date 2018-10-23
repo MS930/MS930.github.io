@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Example content
+title: Business Analytics
 ---
 
-#Unsupervised Methods: Nonlinear Mapping
-
+Unsupervised Methods: Nonlinear Mapping
+=======
 
 
 
@@ -28,22 +28,23 @@ title: Example content
 
 
 
+![1](https://i.imgur.com/orBAuKy.png) 
 
-![1](https://i.imgur.com/orBAuKy.png)
- 그림1
+<p align="center"> 그림1 </p>
 
 이렇게 선형 축소 방법론이 유효하지 못할 경우 Nonlinear Mapping 방법론적 접근이 필요하며 대표적으로 오늘 다룰 Isomap, LLE, t-SNE 방법론이 있겠습니다.
 
 ---
 
-##Isomap
+Isomap
+-------
 
 Isomap은 다차원 스케일링(MDS) 또는 주성분 분석(PCA)의 확장이자 두 방법론을 결합한 방법론으로 볼 수 있습니다. 앞서 다루었던 PCA와 MDS의 특징을 결합하여 모든 점 사이의 측지선 거리를 유지하는 더 낮은 차원의 임베딩을 추구합니다. 여기서 측지거리란, 두 측점사이의 타원체면을 따라 이루어진 거리를 말합니다. 
 
 
 
 ![출처 COMP61021(The University of Manchester)](https://i.imgur.com/YeDG7pl.png)
-그림2
+<p align="center"> 그림2 </p>
 
 그림2에 따르면 두 점은 유클리디안 거리로는 가깝지만 실제 측지거리를 구할 경우 색깔이 나타내는 의미만큼 멀리 떨어져 위치함을 알 수 있습니다. 즉, Isomap 알고리즘은 두 데이터간의 실제 특징을 반영하는 거리 정보를 사용하는 효과적인 차원 축소를 추구합니다.
 
@@ -59,7 +60,7 @@ Isomap 알고리즘은 세 단계로 구성됩니다. 코드와 함께 설명하
 
 
 ![출처같음](https://i.imgur.com/wfCi78s.png)
-그림3
+<p align="center"> 그림3 </p>
 
 이렇게 점끼리 연결되었을때 엣지의 가중치는 두 연결된 점 사이의 유클리디안 거리가 됩니다. 
 
@@ -97,7 +98,7 @@ $$
 
 
 ![출처같음2](https://i.imgur.com/FwctPtZ.png)
-그림4
+<p align="center"> 그림4 </p>
 
 
 
@@ -107,7 +108,7 @@ MNIST 7개의 손글씨 숫자 Dataset을 Isomap에 활용하여 차원 축소
 
 1. Dijkstra 알고리즘 생성 
 
-```
+```python
 class Graph(object):
     def __init__(self):
         self.nodes = set()
@@ -147,7 +148,7 @@ def dijkstra(graph, initial_node):
 
 2. Isomap 함수 생성
 
-```
+```python
 from sklearn.neighbors import NearestNeighbors, kneighbors_graph
 from sklearn.decomposition import KernelPCA
 from dijkstra import Graph, dijkstra
@@ -168,7 +169,7 @@ def isomap(input, n_neighbors, n_components, n_jobs):
 
 3. MNIST 데이터 활용하여 모델 적용 
 
-```
+```python
 from sklearn import (datasets,random_projection)
 from time import time
 import numpy as np
@@ -241,12 +242,15 @@ ax.scatter(embedding_three_dim[:, 0], embedding_three_dim[:, 1], embedding_three
 총 7개의 숫자가 2차원에서도 잘 분류되었고 3차원에서도 각 색깔이 뚜렷하게 군집을 이루고 있음을 확인할 수 있다. 
 
 ![다운로드](https://i.imgur.com/lpviFTG.png)
-그림5
+<p align="center"> 그림5 </p>
+
 ![다운로드 (1)](https://i.imgur.com/J9Rdi7l.png)
-그림6
+<p align="center"> 그림6 </p>
+
 ---
 
-##LLE
+LLE
+-------
 
 로컬 선형 임베딩(Local Linear Embedding)은 고차원의 공간에서 인접해 있는 데이터들 사이의 선형적 구조를 보존하면서 저차원으로 임베딩하는 방법론입니다. 즉 좁은 범위에서 구축한 선형모델을 연결하면 다양체, 매니폴드를 잘 표현할 수 있다는 알고리즘입니다. LLE는 다음과 같은 장점을 갖습니다. 
 1. 사용하기에 간단하다. 
@@ -279,7 +283,7 @@ $\Phi(W) = \sum_i \left| y_i - \sum_j W_ik y_j \right|^2$
 
 
 ![캡처](https://i.imgur.com/SBVKuSc.png)
-그림7
+<p align="center"> 그림7 </p>
 
 
 그림 7는 LLE학습 과정을 나타냈습니다. 가중치와 벡터는 비록 선형대수의 방법으로 계산되지만 점들이 이웃 점들에게서만 재구축된다는 조건은 비선형 임베딩 결과를 초래하기에 nonlinear mapping으로 간주됩니다. 
@@ -297,7 +301,7 @@ $ O[D \log(k) N \log(N)] + O[D N K^3] + O[d N^2]$
 
 1. 1000개의 스위스롤을 구성하는 데이터를 2차원으로 차원 축소 
 
-```
+```python
 import pylab as pl
 import numpy as np
 
@@ -363,18 +367,20 @@ pl.show()
 
 
 ![figure_1](https://i.imgur.com/ZXznmRR.png)
-그림8
+<p align="center"> 그림8 </p>
+
 
 
 ---
 
-##t-SNE
+t-SNE
+-------
 
 t-SNE 전에  SNE(Stochastic Neighbor Embedding)부터 설명하겠습니다.
 SNE는 고차원 공간에서 유클리드 거리를 포인트들간의 유사성을 표현하는 조건부 확률로 변환하는 방법입니다. 두 점 i에 대해 j와의 유사도를 나타내는 조건부 확률은 i를 중심으로하는 가우시안 분포(정규 분포)의 밀도에 비례하여 근방이 선택되도록 하는 확률을 의미합니다. 즉 조건부 확률이 높다면 서로간의 유사성이 높아 포인트의 거리가 가깝고 반대일 경우에는 거리가 멀다고 해석할 수 있습니다. 
 
 ![4](https://i.imgur.com/7qATrbV.png)
-그림9
+<p align="center"> 그림9 </p>
 
 
 본격적으로 SNE알고리즘 계산을 위해 고차원 공간의 데이터 포인트간의 거리 정보를 보존하는 저차원 데이터 포인트를 정의합니다. 그림7은 고차원과 저차원에서 각 데이터 포인트끼리의 조건부 확률, 즉 유사도를 의미합니다.  
@@ -387,10 +393,10 @@ SNE는 고차원 공간에서 유클리드 거리를 포인트들간의 유사�
 
 
 ![5](https://i.imgur.com/9By9iXh.png)
-그림10
+<p align="center"> 그림10 </p>
 
 ![6](https://i.imgur.com/TSohbs1.png)
-그림11
+<p align="center"> 그림11 </p>
 
 
 
@@ -402,14 +408,16 @@ $ q_{ij} = \frac { \left(1+\left|y_i - y_j \right|^2\right)^{-1} }{ \sum_{k\neq 
 
 
 ![7](https://i.imgur.com/FYRDh4p.png)
-그림12
+<p align="center"> 그림12 </p>
+
 
 
 
 t-SNE의 장점은 PCA와는 달리 군집이 증복되지 않는다는 점입니다. 그렇기에 시각화에 굉장히 유용합니다. 또한 지역적인 구조를 잘 잡아내는 동시에 글로벌적 특징도 놓치지 않음이 알려져 있습니다. 아래 그림 13과 같이 각 숫자별 클러스터가 잘 형성되며 동시에 유사한 모습의 숫자인 7과 9의 위치가 굉장히 가까이 나타남을 확인할 수 있습니다.
 
  ![3](https://i.imgur.com/ho78NYk.png)
-그림13
+<p align="center"> 그림13 </p>
+
 반면에 매 시도마다 임의로 데이터 포인트를 선정하기에 축의 위치가 계속해서 변해 모델의 학습용으로는 좋지 않습니다. 또한 계산 비용이 많이 들어 학습이 오래걸립니다. 같은 데이터에서도 PCA에 비해 크게 긴 계산 시간을 요구합니다.  
 
 
@@ -420,7 +428,7 @@ t-SNE를 활용하여 5개의 MNIST 글씨 데이터 2차원 축소 시각화
 
 1. t-SNE 학습을 위한 함수들 생성
 
-```
+```python
 import numpy as np
 
 def neg_distance(X):
@@ -506,7 +514,7 @@ def t_SNE(X, num_component, num_iters = 500, learning_rate = 10., momentum = .9)
 2. MNIST Datasets을 활용한 t-SNE 학습
 
 
-```
+```python
 from sklearn import (datasets)
 from time import time
 import numpy as np
@@ -554,4 +562,4 @@ plot_embedding(embedding,"t_SNE projection of the digits (time %.2fs)" %(time() 
 각 숫자별 분류가 잘 되었고 비슷한 모양의 '2'와 '3'이 인접함을 알 수 있습니다.
 
 ![8](https://i.imgur.com/6Wz4nNi.png)
-그림14
+<p align="center"> 그림14 </p>
