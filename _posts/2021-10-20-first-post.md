@@ -41,6 +41,7 @@ title: Example content
 Isomap은 다차원 스케일링(MDS) 또는 주성분 분석(PCA)의 확장이자 두 방법론을 결합한 방법론으로 볼 수 있습니다. 앞서 다루었던 PCA와 MDS의 특징을 결합하여 모든 점 사이의 측지선 거리를 유지하는 더 낮은 차원의 임베딩을 추구합니다. 여기서 측지거리란, 두 측점사이의 타원체면을 따라 이루어진 거리를 말합니다. 
 
 
+<a href="https://imgur.com/UNtzVXf"><img src="https://i.imgur.com/UNtzVXf.png" title="source: imgur.com" /></a>
 
 ![출처 COMP61021(The University of Manchester)](https://i.imgur.com/YeDG7pl.png)
 <그림2>
