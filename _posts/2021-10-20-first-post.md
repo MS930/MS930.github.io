@@ -26,9 +26,7 @@ Unsupervised Methods: Nonlinear Mapping
 여기서 매니폴드(manifold)란, 고차원 공간 중에 존재하는 실질적으로 보다 저차원으로 표시 가능한 도형을 의미합니다. 대표적인 매니폴드 형태인 스위스 롤을 나타내는 그림 1에서 본다면 고차원 공간으로 보여지는 스위스 롤 도형이 사실은 색깔에 따라 저차원으로 표현이 가능함을 알 수 있습니다.
 결론적으로 오늘 다룰 nonlinear mapping 방법론들은 비선형적 차원 축소를 통해 저차원으로도 데이터의 특징을 잘 확보하는데에 그 목적이 있습니다. 
 
-
-
-![1](https://i.imgur.com/orBAuKy.png) 
+<p align="center"><img width="500" height="auto" src="https://i.imgur.com/orBAuKy.png"></p>
 
 <p align="center"> 그림1 </p>
 
@@ -42,8 +40,8 @@ Isomap
 Isomap은 다차원 스케일링(MDS) 또는 주성분 분석(PCA)의 확장이자 두 방법론을 결합한 방법론으로 볼 수 있습니다. 앞서 다루었던 PCA와 MDS의 특징을 결합하여 모든 점 사이의 측지선 거리를 유지하는 더 낮은 차원의 임베딩을 추구합니다. 여기서 측지거리란, 두 측점사이의 타원체면을 따라 이루어진 거리를 말합니다. 
 
 
+<p align="center"><img width="500" height="auto" src="https://i.imgur.com/YeDG7pl.png"></p>
 
-![출처 COMP61021(The University of Manchester)](https://i.imgur.com/YeDG7pl.png)
 <p align="center"> 그림2 </p>
 
 그림2에 따르면 두 점은 유클리디안 거리로는 가깝지만 실제 측지거리를 구할 경우 색깔이 나타내는 의미만큼 멀리 떨어져 위치함을 알 수 있습니다. 즉, Isomap 알고리즘은 두 데이터간의 실제 특징을 반영하는 거리 정보를 사용하는 효과적인 차원 축소를 추구합니다.
@@ -58,8 +56,8 @@ Isomap 알고리즘은 세 단계로 구성됩니다. 코드와 함께 설명하
 
 첫번째 단계에서는 어떤 점들이 매니폴드 상에서 서로 가까이 위치하는지를 측정합니다. 두가지 방식이 사용되는데 첫번째는 고정된 기준값인 앱실론을 기준으로 그보다 거리가 가까운 경우의 모든 두 점을 서로 연결합니다. 두번째는 자기 자신과 가장 가까운 K개의 점을 연결하는 KNN방식으로 모든 점들을 서로 연결합니다. 첫번째 단계가 진행된 후의 모습은 그림3과 같습니다. 
 
+<p align="center"><img width="500" height="auto" src="https://i.imgur.com/wfCi78s.png"></p>
 
-![출처같음](https://i.imgur.com/wfCi78s.png)
 <p align="center"> 그림3 </p>
 
 이렇게 점끼리 연결되었을때 엣지의 가중치는 두 연결된 점 사이의 유클리디안 거리가 됩니다. 
@@ -67,11 +65,13 @@ Isomap 알고리즘은 세 단계로 구성됩니다. 코드와 함께 설명하
 
 
 **2.	두 점 간의 최단 경로 그래프 계산**
-<div>
+
 두 점 i와 j에 대하여 두 점이 서로 연결되어 있다면 $d_G(i,j) = d_X(i,j)$
 서로 연결되어 있지 않으면 $d_G(i,j)$를 무한으로 초기화합니다. 
-그 후 1부터 N개 까지의 k에 있어서 점 i와 j간의 최단 거리를 의미하는 $$d_G(i,j)$$를 $min(d_G(i,j),d_g(i,k)+d_G(k,i))$로 변환합니다. 이 과정에서는 대표적으로 Dijkstra 알고리즘, Floyd's 알고리즘 등이 사용됩니다.
-</div>
+그 후 1부터 N개 까지의 k에 있어서 점 i와 j간의 최단 거리를 의미하는 $d_G(i,j)$를 $min(d_G(i,j),d_g(i,k)+d_G(k,i))$로 변환합니다. 이 과정에서는 대표적으로 Dijkstra 알고리즘, Floyd's 알고리즘 등이 사용됩니다.
+
+
+
 **3.	MDS 방법론을 사용하여 d차원 임베딩 구축**
 
 $\lambda_p $ 를 행렬 $ \tau(D_G) $ 의 p번째 eigenvalue, $v^i_p$를 p-th eigen vector의 i번째 컴포넌트라 할 때, d차원의 p번째 컴포넌트에 대한 coordinate vector $y_i$를 $\sqrt{(\lambda_p)}v_p^i$로 두어 d차원의 임베딩을 구축합니다. 여기서 MDS, 즉 다차원 척도 구성법이란 거리 데이터만 주어졌을 때 그 거리를 재현하는 것처럼 좌표계를 역산하는 방법을 의미합니다. 
@@ -97,12 +97,13 @@ $$
 그림 4는 손글씨 2에 해당하는 MNIST데이터를 Isomap을 활용하여 2차원으로 축소한 결과입니다. 아래로 내려갈수록 숫자 2의 윗부분에 동그랗게 그려지고 오른쪽으로 갈수록 숫자 2의 아랫부분이 동그랗게 그려지는 특징을 정확히 잡아냈음을 확인할 수 있습니다. 
 
 
-![출처같음2](https://i.imgur.com/FwctPtZ.png)
+<p align="center"><img width="500" height="auto" src="https://i.imgur.com/FwctPtZ.png"></p>
+
 <p align="center"> 그림4 </p>
 
 
 
-###Isomap을 활용한 예시 
+### Isomap을 활용한 예시 
 
 MNIST 7개의 손글씨 숫자 Dataset을 Isomap에 활용하여 차원 축소 
 
@@ -241,10 +242,12 @@ ax.scatter(embedding_three_dim[:, 0], embedding_three_dim[:, 1], embedding_three
 
 총 7개의 숫자가 2차원에서도 잘 분류되었고 3차원에서도 각 색깔이 뚜렷하게 군집을 이루고 있음을 확인할 수 있다. 
 
-![다운로드](https://i.imgur.com/lpviFTG.png)
+<p align="center"><img width="500" height="auto" src="https://i.imgur.com/lpviFTG.png"></p>
+
 <p align="center"> 그림5 </p>
 
-![다운로드 (1)](https://i.imgur.com/J9Rdi7l.png)
+<p align="center"><img width="500" height="auto" src="https://i.imgur.com/J9Rdi7l.png"></p>
+
 <p align="center"> 그림6 </p>
 
 ---
@@ -270,9 +273,7 @@ LLE 알고리즘은 3 단계로 구성됩니다.
 
 $ E(W) = \sum_i \left|x_i - \sum_j W_{ij} x_j\right|^2$  
 
-s.t. $ W_{ij} = 0 $ if $ x_j $ 가 $x_i$의 이웃에 속하지 않을때
-
-모든 i 에 대하여 $\sum_j W_{ij} = 1$  
+s.t. $ W_{ij} = 0 $ if $ x_j $ 가 $x_i$의 이웃에 속하지 않을때 모든 i 에 대하여 $\sum_j W_{ij} = 1$  
 
 **3.	부분 고유치 분해**
 
@@ -281,22 +282,22 @@ s.t. $ W_{ij} = 0 $ if $ x_j $ 가 $x_i$의 이웃에 속하지 않을때
 $\Phi(W) = \sum_i \left| y_i - \sum_j W_ik y_j \right|^2$ 
 
 
+<p align="center"><img width="500" height="auto" src="https://i.imgur.com/SBVKuSc.png"></p>
 
-![캡처](https://i.imgur.com/SBVKuSc.png)
 <p align="center"> 그림7 </p>
 
 
 그림 7는 LLE학습 과정을 나타냈습니다. 가중치와 벡터는 비록 선형대수의 방법으로 계산되지만 점들이 이웃 점들에게서만 재구축된다는 조건은 비선형 임베딩 결과를 초래하기에 nonlinear mapping으로 간주됩니다. 
 LLE의 계산복잡도는 아래와 같습니다.
 
-$ O[D \log(k) N \log(N)] + O[D N K^3] + O[d N^2]$
+$$ O[D \log(k) N \log(N)] + O[D N K^3] + O[d N^2] $$
 
 •	  N: 훈련 데이터 포인트의 수 
 •	  D: 입력 차원수
 •	  k: 가장 가까운 이웃의 수
 •	  d: 출력 차원수
 
-###LLE을 활용한 예시 
+### LLE을 활용한 예시 
 
 
 1. 1000개의 스위스롤을 구성하는 데이터를 2차원으로 차원 축소 
@@ -365,8 +366,8 @@ pl.show()
 
 검은색과 흰색으로 색깔에 따라 데이터의 특징을 잘 보존하며 차원 축소가 이루어 졌음을 확인할 수 있습니다. 
 
+<p align="center"><img width="500" height="auto" src="https://i.imgur.com/ZXznmRR.png"></p>
 
-![figure_1](https://i.imgur.com/ZXznmRR.png)
 <p align="center"> 그림8 </p>
 
 
@@ -379,7 +380,9 @@ t-SNE
 t-SNE 전에  SNE(Stochastic Neighbor Embedding)부터 설명하겠습니다.
 SNE는 고차원 공간에서 유클리드 거리를 포인트들간의 유사성을 표현하는 조건부 확률로 변환하는 방법입니다. 두 점 i에 대해 j와의 유사도를 나타내는 조건부 확률은 i를 중심으로하는 가우시안 분포(정규 분포)의 밀도에 비례하여 근방이 선택되도록 하는 확률을 의미합니다. 즉 조건부 확률이 높다면 서로간의 유사성이 높아 포인트의 거리가 가깝고 반대일 경우에는 거리가 멀다고 해석할 수 있습니다. 
 
-![4](https://i.imgur.com/7qATrbV.png)
+
+<p align="center"><img width="500" height="auto" src="https://i.imgur.com/7qATrbV.png"></p>
+
 <p align="center"> 그림9 </p>
 
 
@@ -390,12 +393,12 @@ SNE는 고차원 공간에서 유클리드 거리를 포인트들간의 유사�
 ------ | ------
  $ x_i, x_j$ |  $ y_i, y_j $ 
 
+<p align="center"><img width="500" height="auto" src="https://i.imgur.com/9By9iXh.png"></p>
 
-
-![5](https://i.imgur.com/9By9iXh.png)
 <p align="center"> 그림10 </p>
 
-![6](https://i.imgur.com/TSohbs1.png)
+<p align="center"><img width="500" height="auto" src="https://i.imgur.com/TSohbs1.png"></p>
+
 <p align="center"> 그림11 </p>
 
 
@@ -404,10 +407,8 @@ SNE는 고차원 공간에서 유클리드 거리를 포인트들간의 유사�
 SNE는 앞서 언급했듯이 가우시안 분포를 가정합니다. 그런데 가우시안 분포는 양쪽 꼬리가 충분히 두텁지 않습니다. 즉 일정 거리 이상부터는 아주 멀리 떨어져 있어도 선택될 확률이 큰 차이가 나지 않게되는데 이를 Crowding Problem이라고 합니다. 이 단점을 완화하기 위해 가우시안 분포와 유사하지만 좀 더 양 끝이 두터운 자유도 1의 t분포를 사용합니다. 이것이 바로 t-SNE입니다. 그림12는 가우시안 분포와 t분포의 차이를 보여줍니다. SNE의 $p_{ij}$는 동일하게 사용하며 대신 $q_{ij}$에만 t분포를 적용합니다. t분포를 적용한 $q_{ij}$ 는 아래와 같습니다. 
 
 
-$ q_{ij} = \frac { \left(1+\left|y_i - y_j \right|^2\right)^{-1} }{ \sum_{k\neq l }\left(1+\left|y_k - y_l \right|^2\right)^{-1} } $
+<p align="center"><img width="500" height="auto" src="https://i.imgur.com/FYRDh4p.png"></p>
 
-
-![7](https://i.imgur.com/FYRDh4p.png)
 <p align="center"> 그림12 </p>
 
 
@@ -415,14 +416,15 @@ $ q_{ij} = \frac { \left(1+\left|y_i - y_j \right|^2\right)^{-1} }{ \sum_{k\neq 
 
 t-SNE의 장점은 PCA와는 달리 군집이 증복되지 않는다는 점입니다. 그렇기에 시각화에 굉장히 유용합니다. 또한 지역적인 구조를 잘 잡아내는 동시에 글로벌적 특징도 놓치지 않음이 알려져 있습니다. 아래 그림 13과 같이 각 숫자별 클러스터가 잘 형성되며 동시에 유사한 모습의 숫자인 7과 9의 위치가 굉장히 가까이 나타남을 확인할 수 있습니다.
 
- ![3](https://i.imgur.com/ho78NYk.png)
+<p align="center"><img width="500" height="auto" src="https://i.imgur.com/ho78NYk.png"></p>
+
 <p align="center"> 그림13 </p>
 
 반면에 매 시도마다 임의로 데이터 포인트를 선정하기에 축의 위치가 계속해서 변해 모델의 학습용으로는 좋지 않습니다. 또한 계산 비용이 많이 들어 학습이 오래걸립니다. 같은 데이터에서도 PCA에 비해 크게 긴 계산 시간을 요구합니다.  
 
 
 
-###t-SNE를 활용한 예시
+### t-SNE를 활용한 예시
 
 t-SNE를 활용하여 5개의 MNIST 글씨 데이터 2차원 축소 시각화
 
@@ -561,5 +563,6 @@ plot_embedding(embedding,"t_SNE projection of the digits (time %.2fs)" %(time() 
 
 각 숫자별 분류가 잘 되었고 비슷한 모양의 '2'와 '3'이 인접함을 알 수 있습니다.
 
-![8](https://i.imgur.com/6Wz4nNi.png)
+<p align="center"><img width="500" height="auto" src="https://i.imgur.com/6Wz4nNi.png"></p>
+
 <p align="center"> 그림14 </p>
