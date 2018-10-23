@@ -107,7 +107,7 @@ $$
 
 MNIST 7개의 손글씨 숫자 Dataset을 Isomap에 활용하여 차원 축소 
 
-1.  Dijkstra 알고리즘 생성 
+*  Dijkstra 알고리즘 생성 
 
 ```python
 class Graph(object):
@@ -147,7 +147,7 @@ def dijkstra(graph, initial_node):
     
 ```
 
-2.  Isomap 함수 생성
+*  Isomap 함수 생성
 
 ```python
 from sklearn.neighbors import NearestNeighbors, kneighbors_graph
@@ -168,7 +168,7 @@ def isomap(input, n_neighbors, n_components, n_jobs):
     return(embedding)
 ```
 
-3.  MNIST 데이터 활용하여 모델 적용 
+*  MNIST 데이터 활용하여 모델 적용 
 
 ```python
 from sklearn import (datasets,random_projection)
@@ -238,7 +238,7 @@ ax.scatter(embedding_three_dim[:, 0], embedding_three_dim[:, 1], embedding_three
 
 ```
 
-4.  최종 시각화 결과 확인
+*  최종 시각화 결과 확인
 
 총 7개의 숫자가 2차원에서도 잘 분류되었고 3차원에서도 각 색깔이 뚜렷하게 군집을 이루고 있음을 확인할 수 있습니다. 
 
@@ -305,7 +305,7 @@ $$ O[D \log(k) N \log(N)] + O[D N K^3] + O[d N^2] $$
 ### LLE을 활용한 예시 
 
 
-1.  1000개의 스위스롤을 구성하는 데이터를 2차원으로 차원 축소 
+*  1000개의 스위스롤을 구성하는 데이터를 2차원으로 차원 축소 
 
 ```python
 import pylab as pl
@@ -367,7 +367,7 @@ pl.axis('off')
 pl.show()
 
 ```
-2.  스위스롤 데이터의 차원 축소 시각화 결과 
+*  스위스롤 데이터의 차원 축소 시각화 결과 
 
 검은색과 흰색으로 색깔에 따라 데이터의 특징을 잘 보존하며 차원 축소가 이루어 졌음을 확인할 수 있습니다. 
 
@@ -433,7 +433,7 @@ t-SNE의 장점은 PCA와는 달리 군집이 증복되지 않는다는 점입�
 
 t-SNE를 활용하여 5개의 MNIST 글씨 데이터 2차원 축소 시각화
 
-1.  t-SNE 학습을 위한 함수들 생성
+*  t-SNE 학습을 위한 함수들 생성
 
 ```python
 import numpy as np
@@ -518,7 +518,7 @@ def t_SNE(X, num_component, num_iters = 500, learning_rate = 10., momentum = .9)
 ```
 
 
-2.  MNIST Datasets을 활용한 t-SNE 학습
+*  MNIST Datasets을 활용한 t-SNE 학습
 
 
 ```python
@@ -564,7 +564,7 @@ embedding = t_SNE(X = X, num_component = 2)
 plot_embedding(embedding,"t_SNE projection of the digits (time %.2fs)" %(time() - t0))
 ```
 
-3.  학습된 데이터를 활용한 시각화 결과 
+*  학습된 데이터를 활용한 시각화 결과 
 
 각 숫자별 분류가 잘 되었고 비슷한 모양의 '2'와 '3'이 인접함을 알 수 있습니다.
 
