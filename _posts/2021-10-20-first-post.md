@@ -87,10 +87,10 @@ $$
 $$
 
    
-•	  N: 훈련 데이터 포인트의 수 
-•	  D: 입력 차원수
-•	  k: 가장 가까운 이웃의 수
-•	  d: 출력 차원수
++ N: 훈련 데이터 포인트의 수 
++ D: 입력 차원수
++ k: 가장 가까운 이웃의 수
++ d: 출력 차원수
 
 
 
@@ -240,7 +240,7 @@ ax.scatter(embedding_three_dim[:, 0], embedding_three_dim[:, 1], embedding_three
 
 4. 최종 시각화 결과 확인
 
-총 7개의 숫자가 2차원에서도 잘 분류되었고 3차원에서도 각 색깔이 뚜렷하게 군집을 이루고 있음을 확인할 수 있다. 
+총 7개의 숫자가 2차원에서도 잘 분류되었고 3차원에서도 각 색깔이 뚜렷하게 군집을 이루고 있음을 확인할 수 있습니다. 
 
 <p align="center"><img width="500" height="auto" src="https://i.imgur.com/lpviFTG.png"></p>
 
@@ -271,7 +271,10 @@ LLE 알고리즘은 3 단계로 구성됩니다.
 
 현재의 데이터를 나머지 k개의 데이터의 가중치의 합을 뺄 때 최소가 되는 가중치 매트릭스를 구합니다. 
 
-$ E(W) = \sum_i \left|x_i - \sum_j W_{ij} x_j\right|^2$  
+$$
+ E(W) = \sum_i \left|x_i - \sum_j W_{ij} x_j\right|^2
+$$
+
 
 s.t. $ W_{ij} = 0 $ if $ x_j $ 가 $x_i$의 이웃에 속하지 않을때 모든 i 에 대하여 $\sum_j W_{ij} = 1$  
 
@@ -279,7 +282,9 @@ s.t. $ W_{ij} = 0 $ if $ x_j $ 가 $x_i$의 이웃에 속하지 않을때 모든
 
 앞서 구한 가중치를 최대한 보장하며 차원을 축소합니다. 이때 차원 축소된 후의 점을 Y로 표현하며 차원 축소된 $ Y_j $와의 값 차이를 최소화하는 Y를 찾습니다. 
 
-$\Phi(W) = \sum_i \left| y_i - \sum_j W_ik y_j \right|^2$ 
+$$
+\Phi(W) = \sum_i \left| y_i - \sum_j W_ik y_j \right|^2
+$$ 
 
 
 <p align="center"><img width="500" height="auto" src="https://i.imgur.com/SBVKuSc.png"></p>
@@ -292,10 +297,10 @@ LLE의 계산복잡도는 아래와 같습니다.
 
 $$ O[D \log(k) N \log(N)] + O[D N K^3] + O[d N^2] $$
 
-•	  N: 훈련 데이터 포인트의 수 
-•	  D: 입력 차원수
-•	  k: 가장 가까운 이웃의 수
-•	  d: 출력 차원수
++ N: 훈련 데이터 포인트의 수 
++ D: 입력 차원수
++ k: 가장 가까운 이웃의 수
++ d: 출력 차원수
 
 ### LLE을 활용한 예시 
 
