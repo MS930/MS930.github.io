@@ -7,10 +7,10 @@ permalink:        pretty
 #relative_permalinks: true
 
 # Setup
-title:            Woosik
+title:            Jeong Minsung
 tagline:          'A Jekyll theme'
 description:      Deep learning, Data Analysis
-url:              https://woosikyang.github.io
+url:              https://ms930.github.io
 baseurl:          ""
 
 author:
